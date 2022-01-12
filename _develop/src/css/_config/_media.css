@@ -1,0 +1,52 @@
+@custom-media --pc (min-width: 769px),
+print;
+@custom-media --sp only screen and (max-width: 768px);
+
+/*
+【1】=======================================================================
+基本
+@custom-media --pc (min-width: 769px), print;
+@custom-media --sp only screen and (max-width: 768px);
+*/
+
+
+/*
+【2】=======================================================================
+pw(num)を使いtabletではPC版をvw換算で見せるやつ
+PC版をここで一気にtb番に変換できる(tablet用に出力)
+http://matsumoto.sample.caters.jp/vw-change/
+
+【SP縦横 : タブレット : PC】
+@custom-media --pc (min-width: 1367px), print;
+@custom-media --tb (min-width: 768px) and (max-width: 1366px);
+@custom-media --sp only screen and (max-width: 767px);
+
+
+【SP縦 ＆ それ以外版。SP横でSP縦デザイン見せるメリットってあまりない。
+こっちが良いかはケースバイケース。】
+@custom-media --pc (min-width: 1367px), print;
+@custom-media --tb only screen and (min-width: 415px) and (max-width: 1366px);
+@custom-media --sp only screen and (max-width: 414px);
+*/
+
+
+/*
+【3】=======================================================================
+iPadPro考慮 SP <--> Tablet縦 <--> PC&Tablet横
+
+@custom-media --pc (min-width: 769px) and (orientation: landscape), print;
+@custom-media --tb (min-width: 769px) and (orientation: portrait);
+@custom-media --sp only screen and (max-width: 768px);
+*/
+
+
+/*
+【4】=======================================================================
+SP縦とそれ以外(Tablet縦もPC)
+
+@custom-media --pc (min-width: 415px), print;
+@custom-media --sp only screen and (max-width: 414px);
+*/
+
+
+/* anyIdeas? 何かあれば更新するので一声。 */

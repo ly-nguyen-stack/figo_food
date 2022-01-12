@@ -1,0 +1,46 @@
+mixin pic(pc, sp, alt='')
+  picture
+    source(media='(min-width: 769px)', srcset='/assets/images/' + pc)
+    source(media='(max-width: 768px)', srcset='/assets/images/' + sp)
+    img(src='/assets/images/' + sp, srcset='/assets/images/' + sp, alt=alt)&attributes(attributes)
+
+mixin img(src, alt='')
+  -
+    let targetPath = src
+      .replace(/["']/g, '')
+      .replace(/\.\.\//g, '')
+      .replace(/^\//i, '');
+    targetPath = nodePath.resolve(nodeDest, targetPath);
+
+    let isError = false;
+    let dimensions = null;
+    try {
+      let file = nodeFs.readFileSync(targetPath);
+    } catch(e) {
+      isError = true;
+    }
+    if (!isError) {
+      dimensions = nodeSize(targetPath);
+    }
+  if dimensions
+    img(src='/assets/images/' + src, alt=alt, width=dimensions.width, height=dimensions.height, loading="lazy")&attributes(attributes)
+  else
+    img(src='/assets/images/' + src, alt=alt, loading="lazy")&attributes(attributes)
+
+.inner
+  h1.header__logo
+    a(href="#")
+      +img('common/logo.png', 'Figo')
+  nav.header__navbar
+    ul.header__menu
+      li
+        a(href="#") Home
+      li
+        a(href="#") Menu
+      li
+        a(href="#") Service
+      li
+        a(href="#") Sign In
+      li
+        a.has-cart(href="#")
+          +img('common/ic_cart.png', '')

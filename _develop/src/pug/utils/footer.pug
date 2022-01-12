@@ -1,0 +1,80 @@
+mixin pic(pc, sp, alt='')
+  picture
+    source(media='(min-width: 769px)', srcset='/assets/images/' + pc)
+    source(media='(max-width: 768px)', srcset='/assets/images/' + sp)
+    img(src='/assets/images/' + sp, srcset='/assets/images/' + sp, alt=alt)&attributes(attributes)
+
+mixin img(src, alt='')
+  -
+    let targetPath = src
+      .replace(/["']/g, '')
+      .replace(/\.\.\//g, '')
+      .replace(/^\//i, '');
+    targetPath = nodePath.resolve(nodeDest, targetPath);
+
+    let isError = false;
+    let dimensions = null;
+    try {
+      let file = nodeFs.readFileSync(targetPath);
+    } catch(e) {
+      isError = true;
+    }
+    if (!isError) {
+      dimensions = nodeSize(targetPath);
+    }
+  if dimensions
+    img(src='/assets/images/' + src, alt=alt, width=dimensions.width, height=dimensions.height, loading="lazy")&attributes(attributes)
+  else
+    img(src='/assets/images/' + src, alt=alt, loading="lazy")&attributes(attributes)
+
+.inner
+  .footer__group
+    .footer__group__info
+      h2.footer__logo
+        a(href="#")
+          +img('common/logo.png', 'Figo')
+      p
+        | Don't miss to subscribe to our new 
+        br
+        | feeds, Kindly fill the form bellow.
+      ul.footer__social
+        li
+          a(href="#")
+            +img('common/ic_fb.png', 'Facebook')
+        li
+          a(href="#")
+            +img('common/ic_tw.png', 'Twitter')
+        li
+          a(href="#")
+            +img('common/ic_ins.png', 'Instagram')
+        li
+          a(href="#")
+            +img('common/ic_prt.png', 'Pinterest')
+    .footer__group__menu
+      .menu__item
+        h3 Our Menu
+        ul.menu__item__list
+          li
+            a(href="#") Lunch
+          li
+            a(href="#") Dinner
+          li
+            a(href="#") Catering
+      .menu__item
+        h3 Links
+        ul.menu__item__list
+          li
+            a(href="#") About Us
+          li
+            a(href="#") Terms Of Use
+          li
+            a(href="#") Privacy Policy
+      .menu__item
+        h3 Our Menu
+        p
+          a(href="tel:+8801622010442") +8801622010442
+          br
+          a(href="mailTo:info@restaurant.com") info@restaurant.com
+          br
+          | Daudkandi, Comilla
+    

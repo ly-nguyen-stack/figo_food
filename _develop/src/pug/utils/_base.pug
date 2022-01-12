@@ -1,0 +1,113 @@
+-
+  var subDirectory = process.env.npm_package_config_subDirectory;
+  var isSSI = false;
+
+include ./_jsonLD.pug
+
+block meta
+  -
+    var title = "サンプル";
+    var description = "説明が入ります";
+    //- var keywords = "a,b,c,d,e"
+    var url = "http://example.co.jp/"
+
+block subTitle
+  - var pageTitle = ''
+
+-
+  if (pageTitle.length) {
+    pageTitle = pageTitle + ' | ';
+  }
+
+
+mixin pic(pc, sp, alt='')
+  picture
+    source(media='(min-width: 769px)', srcset='/assets/images/' + pc)
+    source(media='(max-width: 768px)', srcset='/assets/images/' + sp)
+    img(src='/assets/images/' + sp, srcset='/assets/images/' + sp, alt=alt)&attributes(attributes)
+
+mixin img(src, alt='')
+  -
+    let targetPath = 'assets/images/'+src
+      .replace(/["']/g, '')
+      .replace(/\.\.\//g, '')
+      .replace(/^\//i, '');
+    targetPath = nodePath.resolve(nodeDest, targetPath);
+
+    let isError = false;
+    let dimensions = null;
+    try {
+      let file = nodeFs.readFileSync(targetPath);
+    } catch(e) {
+      isError = true;
+    }
+    if (!isError) {
+      dimensions = nodeSize(targetPath);
+    }
+  if dimensions
+    img(src='/assets/images/' + src, alt=alt, width=dimensions.width, height=dimensions.height, loading="lazy")&attributes(attributes)
+  else
+    img(src='/assets/images/' + src, alt=alt, loading="lazy")&attributes(attributes)
+
+
+doctype html
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name="format-detection", content="telephone=no")
+    title #{pageTitle}#{title}
+    meta(name='Description', content=description)
+    //- meta(name='Keywords', content=keywords) ＊今やGoogleはここをサポートしていないのでデフォルトではdisableしておきます。
+
+    meta(property='og:type', content='website')
+    meta(property='og:description', content=description)
+    meta(property='og:title', content=pageTitle+title)
+    meta(property='og:url', content=url)
+    meta(property='og:image', content=url + 'og.png')
+    meta(property='og:locale', content='ja_JP')
+
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:site', content=title)
+    meta(name='twitter:description', content=description)
+    link(rel='shortcut icon', href='/favicon.ico')
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cookie&display=swap")
+
+    block stylesheet
+      link(rel="stylesheet", href='/' + subDirectory + process.env.npm_package_config_assetPath + '/css/common.css')
+
+    != `\n${ createLD(jsonLD) }`
+
+    block richResults
+    script.
+      var bodyWidth = (document.body && document.body.clientWidth) || 0; document.documentElement.style.setProperty('--vw', (bodyWidth / 100) + 'px'); document.documentElement.style.setProperty('--vh', (window.innerHeight / 100) + 'px');
+
+  body
+    #container.container
+      //-
+        isSSI = trueの時SSI, そうでない時pugでコーディング
+        watch中に、static_files/include/header.htmlとかを作成すればpublic_htmlにコピーされる。
+      if isSSI
+        != `\n\n      <!--#include virtual="/${ subDirectory }${ process.env.npm_package_config_assetPath }/include/header.html" -->\n`
+      else
+        header.header#header
+          != `\n\n      <!--#include virtual="/${ subDirectory }/utils/header.html" -->\n`
+
+      main
+        block main
+
+
+      //-  SSIのfooter版。サーバーで使えるか使えないかで分けると良い。
+      if isSSI
+        != `\n\n      <!--#include virtual="/${ subDirectory }${ process.env.npm_package_config_assetPath }/include/footer.html" -->\n`
+      else
+        footer.footer#footer
+          != `\n\n      <!--#include virtual="/${ subDirectory }/utils/footer.html" -->\n`
+
+    block script
+      script(src='/' + subDirectory + process.env.npm_package_config_assetPath + '/js/vendor.js', defer)
+      script(src='/' + subDirectory + process.env.npm_package_config_assetPath + '/js/runtime.js', defer)
+      script(src='/' + subDirectory + process.env.npm_package_config_assetPath + '/js/bundle.js', defer)

@@ -1,0 +1,84 @@
+@media (--pc) {
+  .show_sp {
+    display: none !important;
+  }
+  .container {
+    overflow: hidden;
+    min-width: 1200px;
+  }
+
+  .inner {
+    margin: 0 auto;
+    max-width: 1170px;
+    width: 100%;
+  }
+
+  a[href^='tel'] {
+    pointer-events: none;
+    text-decoration: none;
+  }
+
+  .text-bold {
+    font-weight: 600;
+  }
+
+  .text_break {
+    word-break: break-all;
+  }
+
+  /*========= CSS COMMON ===========*/
+  .btn-default {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
+    background: linear-gradient(70deg, rgba(140, 181, 96, 1) 0%, rgba(99, 157, 43, 1) 100%);
+    width: 220px;
+    height: 60px;
+    outline: none;
+    box-shadow: 0px 5px 20px rgba(89, 136, 43, 0.3);
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: $pop;
+    font-size: rem(16);
+    line-height: 36px;
+    color: #fff;
+    text-align: center;
+    span {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+@media (--sp) {
+  body {
+    font-size: vw(28);
+    line-height: vw(49);
+  }
+
+  .show_pc {
+    display: none !important;
+  }
+
+  .container {
+    overflow: hidden;
+    min-width: 320px;
+  }
+
+  .inner {
+    padding-left: vw(30);
+    padding-right: vw(30);
+  }
+
+  .text-bold {
+    font-weight: 600;
+  }
+
+  .text_break {
+    word-break: break-all;
+  }
+
+  /*========= CSS COMMON ===========*/
+}

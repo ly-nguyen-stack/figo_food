@@ -1,0 +1,10 @@
+extends ../utils/_base.pug
+
+block append stylesheet
+  link(rel="stylesheet", href='/' + subDirectory + process.env.npm_package_config_assetPath + '/css/second.css')
+
+block subTitle
+  - var pageTitle = 'second';
+
+block main
+  .row

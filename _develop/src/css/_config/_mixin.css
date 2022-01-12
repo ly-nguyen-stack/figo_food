@@ -1,0 +1,13 @@
+/*
+.any {
+  @mixin objectfit;
+}
+@mixin objectfit; でcover:デフォルト
+@mixin objectfit contain; でcontain等に上書き
+object-fit-images用
+*/
+
+@define-mixin objectfit $state: cover {
+  object-fit: $state;
+  font-family: 'object-fit: $state;';
+}

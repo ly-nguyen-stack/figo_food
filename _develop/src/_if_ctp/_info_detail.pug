@@ -1,0 +1,122 @@
+extends ../_utils/_base.pug
+
+block main
+  //-  ここでいいです
+  script(src='https://use.fontawesome.com/56dc562ae6.js')
+
+  article
+    .wysiwyg.clearfix
+      .image.top-left
+        img(src='//placehold.jp/cccccc/ffffff/200x200.png', alt='画像左上')
+      .image.top-right
+        img(src='//placehold.jp/cccccc/ffffff/200x200.png', alt='画像右上')
+      .image.top-center
+        img(src='//placehold.jp/cccccc/ffffff/200x200.png', alt='画像中央上')
+      p
+        | 普通のテキストです
+        br
+        b Bタグテキストです
+        br
+        i Iタグテキストです
+      p.text-center 中央寄せ
+      p.text-right 右寄せ
+      p.text-justify
+        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+      .image.bottom-left
+        img(src='//placehold.jp/cccccc/ffffff/200x200.png', alt='画像左下')
+      .image.bottom-right
+        img(src='//placehold.jp/cccccc/ffffff/200x200.png', alt='画像右下')
+      .image.bottom-center
+        img(src='//placehold.jp/cccccc/ffffff/200x200.png', alt='画像中央下')
+      .file
+        p.pdf
+          a(href='xxx.pdf') サンプル.pdf
+      .file
+        p.xls
+          a(href='xxx.xls') サンプル.xls
+      .file
+        p.xlsx
+          a(href='xxx.xlsx') サンプル.xlsx
+      .file
+        p.doc
+          a(href='xxx.doc') サンプル.doc
+      .file
+        p.docx
+          a(href='xxx.docx') サンプル.docx
+
+block append stylesheet
+  style.
+    .wysiwyg {
+      width: 1000px;
+      margin: 0px auto;
+    }
+    .clearfix:after {
+      content:" ";
+      display:block;
+      clear:both;
+    }
+    .image img {
+      max-width: 100%;
+    }
+    .file {
+      border-top: 1px dotted #cccccc;
+      margin: 15px 0;
+      padding: 10px 0 0;
+      text-align: left;
+    }
+    .top-right {
+      float: right;
+      margin: 0px 0px 30px 30px;
+    }
+    .top-left {
+      float: left;
+      margin: 0px 30px 30px 0px;
+    }
+    .top-center {
+      margin: 0px 0px 30px 0px;
+      text-align:center;
+    }
+    .bottom-right {
+      float: right;
+      margin: 30px 0px 0px 30px;
+    }
+    .bottom-left {
+      float: left;
+      margin: 30px 30px 0px 0px;
+    }
+    .bottom-center {
+      margin: 30px 0px 0px 0px;
+      text-align:center;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .text-right {
+      text-align: right;
+    }
+    .text-justify {
+      text-align: justify;
+    }
+
+    .file p:before {
+      font: normal normal normal 14px/1 FontAwesome;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin-right: 10px;
+    }
+
+    .pdf:before {
+      content: "\f1c1";
+      color: red;
+    }
+    .xls:before,
+    .xlsx:before {
+      content: "\f1c3";
+      color: green;
+    }
+    .doc:before,
+    .docx:before {
+      content: "\f0f6";
+      color: blue;
+    }

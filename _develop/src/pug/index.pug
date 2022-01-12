@@ -1,0 +1,200 @@
+extends ./utils/_base.pug
+
+block append stylesheet
+  link(rel="stylesheet", href='/' + subDirectory + process.env.npm_package_config_assetPath + '/css/top.css')
+
+block main
+  include ./_data_list.pug
+  .top-page
+    section.sec-banner
+      .inner
+        .banner__info
+          h2 
+            | All in Good Taste
+            br
+            | Food With Figo.
+          p
+            | Quickly predominate standard compliant architecture
+            br
+            | and may have prospective internal or organic sources. 
+          form.form(action="#" method="POST")
+            .form__group
+              input.form__input(type="text" placeholder="Enter Your Address")
+              button.btn-default(type="submit")
+                span Get Started
+        .banner__photo
+          +img('top/banner_photo.png', '')
+    section.sec-art
+      .inner
+        .art__area
+          .art__photo
+            +img('top/intro_chef.png', '')
+          .art__cont
+            h3.ttl
+              em.ttl__tag Welcome 
+              | Welcome to Figo
+              br
+              | Restaurant
+            p
+              | Quickly predominate standards compliants architectures and 
+              br
+              | prospective internal or "organic" sources. Synergistically mesh 
+              br
+              | quality quality vectors for one-to-one leadership.
+            p
+              | Quickly predominate standards compliants architectures and 
+              br
+              | prospective internal or "organic" sources. Synergistically mesh 
+              br
+              | quality quality vectors for one-to-one leadership.
+            a.btn-default(href="#")
+              | Explore Our Story
+    section.sec-reason
+      .inner
+        h3.ttl.cen
+          em.ttl__tag Reason
+          | Why Choose Us?
+        ul.list.list__reason
+          li.item
+            a.item__link(href="#")
+              figure.item__symbol
+                +img('top/reason_symbol01.png', '')
+              .item__ctn
+                h4 Various Menus
+                p
+                  | Etiam feugiat eleifend est, odio 
+                  br
+                  | tempor vitaeVivamus maximus 
+                  br
+                  | scelerisque ipsum nec commodo.
+          li.item
+            a.item__link(href="#")
+              figure.item__symbol
+                +img('top/reason_symbol02.png', '')
+              .item__ctn
+                h4 Pocket Friendly Delivery
+                p
+                  | Etiam feugiat eleifend est, odio 
+                  br
+                  | tempor vitaeVivamus maximus 
+                  br
+                  | scelerisque ipsum nec commodo.
+          li.item
+            a.item__link(href="#")
+              figure.item__symbol
+                +img('top/reason_symbol03.png', '')
+              .item__ctn
+                h4 Best Offers
+                p
+                  | Etiam feugiat eleifend est, odio 
+                  br
+                  | tempor vitaeVivamus maximus 
+                  br
+                  | scelerisque ipsum nec commodo.
+    section.sec-browser
+      .inner
+        h3.ttl.cen
+          em.ttl__tag Browser
+          | Explore Our Menu
+        .browser__tabs
+          ul.browser__list
+            li
+              a.active(href="#") Breakfast
+            li
+              a(href="#") Lunch
+            li
+              a(href="#") Dinner
+            li
+              a(href="#") Desert
+            li
+              a(href="#") Soups
+            li
+              a(href="#") Drinks
+          .browser__conts
+            .browser__tabs_box#breakfast
+              | conts
+            .browser__tabs_box#lunch
+              | conts
+            .browser__tabs_box#dinner
+              | conts
+            .browser__tabs_box#desert
+              | conts
+            .browser__tabs_box#soups
+              | conts
+            .browser__tabs_box#drinks
+              | conts
+    section.sec-art
+      .inner
+        .art__area.art__area--reverse
+          .art__photo
+            +img('top/history_photo.png', '')
+          .art__cont
+            h3.ttl
+              em.ttl__tag History of Figo
+              | We Cook Tradition &amp;
+              br
+              | Family Recipes
+            p
+              | Quickly predominate standards compliants architectures and 
+              br
+              | prospective internal or "organic" sources. Synergistically mesh 
+              br
+              | quality quality vectors for one-to-one leadership.
+            p
+              | Quickly predominate standards compliants architectures and 
+              br
+              | prospective internal or "organic" sources. 
+            a.btn.btn__default(href="#")
+              | Explore Our Story
+    section.sec-test
+      .inner
+        h3.ttl
+          em.ttl__tag Testimonials
+          | Food Lover's Say
+        .test__box
+          ul.test__list
+            each item in list.foodLoverList
+              li.item
+                .item__ctn
+                  figure.item__avt
+                    +img(`${item.src}`, '')
+                  .item__info
+                    h4 !{item.name}
+                    p !{item.job}
+                .item__more
+                  p !{item.description}
+    section.sec-news
+      .inner
+        h3.ttl
+          em.ttl__tag News
+          | Latest News
+        ul.news__list
+          mixin item(src, ttl)
+            li.item
+              a.item__link(href="#")
+                figure
+                  +img(src, '')
+                .item__cont
+                  h4= ttl
+                  p
+                    | Quickly of predominate and standards 
+                    br
+                    | compliiants and an architectures.
+                  span Read More
+          +item('top/news_01.png', 'Spain Appetizer')
+          +item('top/news_02.png', 'Wine And Cheese')
+          +item('top/news_03.png', 'Cups Of Coffee')
+    section.sec-sub
+      .inner
+        h3.ttl
+          em.ttl__tag Subscription
+          | Wants to Get Update? 
+        form.sub__form(action="#")
+          .form__group
+            input(type="text" placeholder="Enter Your Email Address")
+            button(type="submit") go
+
+
+
+
+    
